@@ -1,3 +1,4 @@
+'''
 import joblib
 import json
 import numpy as np
@@ -97,4 +98,4 @@ if __name__ == '__main__':
     # print(classify_image(None,"E:\Samarth\python\Machine Learning\project 2\Server\\test_images\\virat3.jpg"))
 
 
-    
+    '''
