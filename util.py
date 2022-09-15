@@ -48,11 +48,6 @@ def load_saved_artifacts():
 
 
 def get_cv2_image_from_base64_string(b64str):
-    '''
-    credit: https://stackoverflow.com/questions/33754935/read-a-base-64-encoded-image-from-memory-using-opencv-python-library
-    :param uri:
-    :return:
-    '''
     encoded_data = b64str.split(',')[1]
     nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
