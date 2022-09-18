@@ -103,7 +103,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('app.html')
+    return render_template('index.html')
 
 @app.route('/classify_image', methods=['GET', 'POST'])
 def classify_image():
