@@ -100,7 +100,9 @@ if __name__ == '__main__':
 
 app = Flask(__name__)
 
-
+@app.route('/')
+def home():
+    return render_template('app.html')
 
 @app.route('/classify_image', methods=['GET', 'POST'])
 def classify_image():
