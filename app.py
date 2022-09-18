@@ -1,11 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import util
 import joblib
 import json
 import numpy as np
 import base64
 import cv2
-import render_template
 from wavelet import w2d
 __class_name_to_number = {}
 __class_number_to_name = {}
