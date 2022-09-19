@@ -19,7 +19,7 @@ function init() {
         let imageData = file.dataURL;
         
         // var url = "http://127.0.0.1:5000/classify_image";
-        var url = "/api/classify_image";
+        var url = "https://footballer-classification.herokuapp.com/classify_image";
 
 
         $.post(url, {
