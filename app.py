@@ -9,8 +9,8 @@ from wavelet import w2d
 __class_name_to_number = {}
 __class_number_to_name = {}
 
-__model = None
-
+__class_name_to_number = json.load(open("class_dictionary.json", "r"))
+__model = joblib.load(open('saved_model.pkl', 'rb'))
 def classify_image(image_base64_data, file_path=None):
     imgs = get_cropped_image_if_2_eyes(file_path, image_base64_data)
 
