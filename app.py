@@ -37,8 +37,8 @@ def load_saved_artifacts():
     global __class_name_to_number
     global __class_number_to_name
 
-        __class_name_to_number = json.load(open("class_dictionary.json", "r"))
-        __class_number_to_name = {v:k for k,v in __class_name_to_number.items()}
+    __class_name_to_number = json.load(open("class_dictionary.json", "r"))
+    __class_number_to_name = {v:k for k,v in __class_name_to_number.items()}
 
     global __model
     if __model is None:
