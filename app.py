@@ -52,6 +52,9 @@ def classify_image(image_base64_data, file_path=None):
 
     return result
 
+def class_number_to_name(class_num):
+    return __class_number_to_name[class_num]
+    
 def load_saved_artifacts():
     print("loading saved artifacts...start")
     global __class_name_to_number
@@ -94,7 +97,6 @@ def get_b64_test_image_for_virat():
     with open("Server\\b64.txt") as f:
         return f.read()
 
-def class_number_to_name(class_num):
-        return __class_number_to_name[class_num]
+
     
     
