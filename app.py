@@ -9,9 +9,10 @@ from wavelet import w2d
 __class_name_to_number = {}
 __class_number_to_name = {}
 
-__class_name_to_number = json.load(open("class_dictionary.json", "r"))
-__model = joblib.load(open('saved_model.pkl', 'rb'))
+
 def classify_image(image_base64_data, file_path=None):
+    __class_name_to_number = json.load(open("class_dictionary.json", "r"))
+    __model = joblib.load(open('saved_model.pkl', 'rb'))
     imgs = get_cropped_image_if_2_eyes(file_path, image_base64_data)
 
     result = []
@@ -103,7 +104,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/classify_image', methods=['GET', 'POST'])
-def classify_image():
+def clasify_image():
     image_data = request.form['image_data']
 
     response = jsonify(classify_image(image_data))
