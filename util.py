@@ -1,16 +1,17 @@
-'''
 import joblib
 import json
 import numpy as np
 import base64
 import cv2
 from wavelet import w2d
+
 __class_name_to_number = {}
 __class_number_to_name = {}
 
 __model = None
 
 def classify_image(image_base64_data, file_path=None):
+
     imgs = get_cropped_image_if_2_eyes(file_path, image_base64_data)
 
     result = []
@@ -31,31 +32,35 @@ def classify_image(image_base64_data, file_path=None):
 
     return result
 
+def class_number_to_name(class_num):
+    return __class_number_to_name[class_num]
+
 def load_saved_artifacts():
     print("loading saved artifacts...start")
     global __class_name_to_number
     global __class_number_to_name
 
-    with open("E:\Samarth\python\Machine Learning\Project 3\Server\\artifacts\class_dictionary.json", "r") as f:
+    with open("/artifacts/class_dictionary.json", "r") as f:
         __class_name_to_number = json.load(f)
         __class_number_to_name = {v:k for k,v in __class_name_to_number.items()}
 
     global __model
     if __model is None:
-        with open('E:\Samarth\python\Machine Learning\Project 3\Server\\artifacts\saved_model.pkl', 'rb') as f:
+        with open('/artifacts/saved_model.pkl', 'rb') as f:
             __model = joblib.load(f)
     print("loading saved artifacts...done")
 
 
 def get_cv2_image_from_base64_string(b64str):
+   
     encoded_data = b64str.split(',')[1]
     nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     return img
 
 def get_cropped_image_if_2_eyes(image_path, image_base64_data):
-    face_cascade = cv2.CascadeClassifier('E:\Samarth\python\Machine Learning\Project 3\Server\opencv\haarcascades\haarcascade_frontalface_default.xml')
-    eye_cascade = cv2.CascadeClassifier('E:\Samarth\python\Machine Learning\Project 3\Server\opencv\haarcascades\haarcascade_eye.xml')
+    face_cascade = cv2.CascadeClassifier('./opencv/haarcascades/haarcascade_frontalface_default.xml')
+    eye_cascade = cv2.CascadeClassifier('./opencv/haarcascades/haarcascade_eye.xml')
 
     if image_path:
         img = cv2.imread(image_path)
@@ -75,22 +80,19 @@ def get_cropped_image_if_2_eyes(image_path, image_base64_data):
     return cropped_faces
 
 def get_b64_test_image_for_virat():
-    with open("E:\Samarth\python\Machine Learning\Project 3\Server\\b64.txt") as f:
+    with open("b64.txt") as f:
         return f.read()
-
-def class_number_to_name(class_num):
-        return __class_number_to_name[class_num]
 
 if __name__ == '__main__':
     load_saved_artifacts()
 
-    # print(classify_image(get_b64_test_image_for_virat(), None))
-    print(class_number_to_name(4))
-    print(classify_image(None,"E:\Samarth\python\Machine Learning\project 2\Server\\test_images\\federer1.jpg"))
-    print(classify_image(None,"E:\Samarth\python\Machine Learning\project 2\Server\\test_images\\federer2.jpg"))
-    # print(classify_image(None,"E:\Samarth\python\Machine Learning\project 2\Server\\test_images\\serena1.jpg"))
-    # print(classify_image(None,"E:\Samarth\python\Machine Learning\project 2\Server\\test_images\\virat1.jpg"))
-    # print(classify_image(None,"E:\Samarth\python\Machine Learning\project 2\Server\\test_images\\virat3.jpg"))
+    print(classify_image(get_b64_test_image_for_virat(), None))
 
-
-    '''
+    # print(classify_image(None, "./test_images/federer1.jpg"))
+    # print(classify_image(None, "./test_images/federer2.jpg"))
+    # print(classify_image(None, "./test_images/virat1.jpg"))
+    # print(classify_image(None, "./test_images/virat2.jpg"))
+    # print(classify_image(None, "./test_images/virat3.jpg")) # Inconsistent result could be due to https://github.com/scikit-learn/scikit-learn/issues/13211
+    # print(classify_image(None, "./test_images/serena1.jpg"))
+    # print(classify_image(None, "./test_images/serena2.jpg"))
+    # print(classify_image(None, "./test_images/sharapova1.jpg"))
