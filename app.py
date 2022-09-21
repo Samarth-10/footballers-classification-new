@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import joblib
 import json
+import util
 import numpy as np
 import base64
 import cv2
