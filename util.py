@@ -7,7 +7,8 @@ from wavelet import w2d
 
 __class_name_to_number = {}
 __class_number_to_name = {}
-
+global __model
+__model = joblib.load(open('/artifacts/saved_model.pkl', 'rb'))
 
 def classify_image(image_base64_data, file_path=None):
 
@@ -45,8 +46,7 @@ def load_saved_artifacts():
 
     global __model
     if __model is None:
-        with open('/artifacts/saved_model.pkl', 'rb') as f:
-            __model = joblib.load(f)
+        __model = joblib.load(open('/artifacts/saved_model.pkl', 'rb'))
     print("loading saved artifacts...done")
 
 
