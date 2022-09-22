@@ -8,7 +8,7 @@ from wavelet import w2d
 __class_name_to_number = {}
 __class_number_to_name = {}
 global __model
-__model = joblib.load(open('/artifacts/saved_model.pkl', 'rb'))
+__model = joblib.load(open('saved_model.pkl', 'rb'))
 
 def classify_image(image_base64_data, file_path=None):
 
