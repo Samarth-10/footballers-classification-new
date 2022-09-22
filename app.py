@@ -6,9 +6,6 @@ import numpy as np
 import base64
 import cv2
 from wavelet import w2d
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
 
 app = Flask(__name__)
 
