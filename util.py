@@ -9,6 +9,8 @@ __class_name_to_number = {}
 __class_number_to_name = {}
 global __model
 __model = joblib.load(open('saved_model.pkl', 'rb'))
+__class_name_to_number = json.load(open("class_dictionary.json", "r"))
+__class_number_to_name = {v:k for k,v in __class_name_to_number.items()}
 
 def classify_image(image_base64_data, file_path=None):
 
